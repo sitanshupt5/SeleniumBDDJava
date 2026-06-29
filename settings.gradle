@@ -1,0 +1,3 @@
+rootProject.name = 'SeleniumBDDJava'
+include 'commons'
+include 'application'

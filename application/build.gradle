@@ -1,0 +1,80 @@
+configurations {
+    agent
+}
+
+dependencies {
+    implementation project(':commons')
+    agent 'org.aspectj:aspectjweaver:1.9.22'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'src/main/java'
+        }
+
+        resources {
+            srcDirs 'src/main/resources'
+        }
+    }
+}
+
+
+// Use main sourceSet for the Cucumber runner (not a standard test project)
+
+task runTests(type: JavaExec, dependsOn: compileJava) {
+    classpath = sourceSets.main.runtimeClasspath + configurations.agent
+    mainClass = 'org.junit.runner.JUnitCore'
+
+    args = ['com.automation.ui.Runner']
+
+    jvmArgs "-javaagent:${configurations.agent.asPath}"
+
+    systemProperty 'app',
+            System.getProperty('app', 'application')
+
+    systemProperty 'cucumber.filter.tags',
+            System.getProperty('cucumber.filter.tags', 'not @wip')
+
+    systemProperty 'env',
+            System.getProperty('env', 'qa')
+
+    systemProperty 'headless',
+            System.getProperty('headless', 'false')
+
+    systemProperty 'runId',
+            System.getProperty('runId', '')
+
+    systemProperty 'allure.results.directory',
+            System.getProperty(
+                    'allure.results.directory',
+                    "reports/${System.getProperty('app', 'application')}/allure-results")
+}
+
+test {
+    useJUnit()
+
+    jvmArgs "-javaagent:${configurations.agent.asPath}"
+
+    // Include compiled main classes and resources so JUnit can find Runner
+    testClassesDirs = sourceSets.main.output.classesDirs
+    classpath = sourceSets.main.runtimeClasspath + configurations.agent
+
+    systemProperty 'app',
+        System.getProperty('app', 'application')
+    systemProperty 'cucumber.filter.tags',
+            System.getProperty('cucumber.filter.tags', 'not @wip')
+    systemProperty 'env',
+            System.getProperty('env', 'qa')
+    systemProperty 'headless',
+            System.getProperty('headless', 'false')
+    systemProperty 'runId',
+            System.getProperty('runId', '')
+    systemProperty 'allure.results.directory',
+            System.getProperty('allure.results.directory',
+                    "reports/${System.getProperty('app', 'application')}/allure-results")
+
+    testLogging {
+        events 'passed', 'skipped', 'failed'
+    }
+}
