@@ -4,6 +4,8 @@ configurations {
 
 dependencies {
     implementation project(':commons')
+    implementation 'junit:junit:4.13.2'
+    implementation 'io.cucumber:cucumber-junit:7.18.1'
     agent 'org.aspectj:aspectjweaver:1.9.22'
 }
 
@@ -77,4 +79,8 @@ test {
     testLogging {
         events 'passed', 'skipped', 'failed'
     }
+}
+
+tasks.withType(ProcessResources).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
