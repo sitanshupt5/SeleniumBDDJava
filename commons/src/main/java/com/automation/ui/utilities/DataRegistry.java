@@ -17,17 +17,17 @@ public class DataRegistry {
     }
 
     public static String getDataFilePath(String scenarioUri) {
-        // e.g. "classpath:features/create_contacts.feature"
         String path = scenarioUri;
         if (path.contains("classpath:")) {
             path = path.substring(path.indexOf("classpath:") + "classpath:".length());
         }
-        int slash = path.lastIndexOf('/');
+        int slash = Math.max(path.lastIndexOf('/'), path.lastIndexOf('\\'));
         String filename = slash >= 0 ? path.substring(slash + 1) : path;
-        String stem = filename.contains(".") ? filename.substring(0, filename.lastIndexOf('.')) : filename;
-        String dir = slash >= 0 ? path.substring(0, slash) : "";
-        String dataDir = dir.replace("/features", "/data").replace("\\features", "\\data");
-        return dataDir + "/" + stem + "_data.yml";
+        String stem = filename.contains(".")
+                ? filename.substring(0, filename.lastIndexOf('.'))
+                : filename;
+
+        return "data/" + stem + "_data.yml";
     }
 
     public static Map<String, Map<String, Object>> parseDataFile(String classpathPath) {
