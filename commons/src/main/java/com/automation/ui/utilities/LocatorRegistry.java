@@ -203,9 +203,12 @@ public class LocatorRegistry {
         if (lines == null || lines.isEmpty()) throw new RuntimeException("Unknown locator '" + name + "' on page '" + page + "'");
         List<By> result = new ArrayList<>();
         for (String line : lines) {
-            int c = line.indexOf(':');
+            int c = line.indexOf(',');
+            if (c == -1) {
+                throw new RuntimeException( "Invalid locator format. Expected 'strategy, locator' but got: " + line);
+            }
             String strat = line.substring(0, c).trim().toLowerCase();
-            String rest = line.substring(c + 1).trim().replaceAll("\\s*page_load_check\\s*$", "").trim();
+            String rest = line.substring(c + 1).trim().replaceAll(",?\\s*page_load_check\\s*$", "").trim();
             String interpolated = interpolate(rest, params);
             By by;
             switch (strat) {
