@@ -59,7 +59,7 @@ public class LocatorRegistry {
             for (URL url : pageFiles) {
                 try (InputStream is = url.openStream()){
                     Map<String, Object> data = yaml.load(is);
-                    if (data != null) continue;
+                    if (data == null) continue;
                     for (Map.Entry<String, Object> entry : data.entrySet()) {
                         String pageName = entry.getKey();
                         if (!(entry.getValue() instanceof Map)) continue;

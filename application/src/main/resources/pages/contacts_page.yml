@@ -1,5 +1,5 @@
 Contacts:
-  page_url: "https://ui.cogmento.com/contacts"
+  page_url: "https://ui.freecrm.com/contacts"
   page_title: "Cogmento CRM"
   locators:
     banner:

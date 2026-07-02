@@ -233,7 +233,7 @@ Given Dataset "HappyPathLogin" is loaded for the scenario
 And I open "Login" page of the application
 └── GivenTestSteps.openApplicationPage("Login")
     └── new UiActions(context.driver).openPage("Login", 30, "load")
-        └── LocatorRegistry.getPageUrl("Login") → "https://ui.cogmento.com/"
+        └── LocatorRegistry.getPageUrl("Login") → "https://ui.freecrm.com/"
             driver.get(url)
             WebDriverWait until document.readyState == "complete"
 
@@ -261,7 +261,7 @@ Then I verify navigation to "Landing" page
         → wait until document.readyState == "complete"
 
         actions.verifyPageUrlMatchesRegistry("Landing", false, 10, 1)
-            → URL starts with "https://ui.cogmento.com" ✓
+            → URL starts with "https://ui.freecrm.com" ✓
 
         actions.verifyPageHeaderIfPresent("Landing", "present", 10)
             → attempts getText("Landing", "page_heading")
@@ -490,8 +490,8 @@ from `<page>_assert_<message>` in the loaded dataset.
 type = qa                    # Default environment; overridden by -Denv at runtime
 
 [common_info]
-qa_baseURL = https://ui.cogmento.com/
-dev_baseURL = https://ui.cogmento.com/
+qa_baseURL = https://ui.freecrm.com/
+dev_baseURL = https://ui.freecrm.com/
 
 [wait]
 sec10 = 10

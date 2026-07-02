@@ -1,5 +1,5 @@
 Landing:
-  page_url: "https://ui.cogmento.com"
+  page_url: "https://ui.freecrm.com"
   page_title: "Cogmento CRM"
   locators:
     search_box:

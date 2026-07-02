@@ -1,5 +1,5 @@
 "CreateNewContact":
-  page_url: "https://ui.cogmento.com/contacts/new"
+  page_url: "https://ui.freecrm.com/contacts/new"
   page_title: "Cogmento CRM"
   locators:
     banner:
