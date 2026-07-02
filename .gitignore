@@ -4,6 +4,9 @@ build/
 gradle/
 */build/
 */target/
+*/logs/
+*/reports/
+*/download/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/

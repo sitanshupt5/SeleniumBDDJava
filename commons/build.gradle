@@ -30,3 +30,7 @@ sourceSets {
         }
     }
 }
+
+tasks.withType(ProcessResources).configureEach {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
